@@ -19,13 +19,13 @@ public:
 	int priority;
 	bool InQueue;
 	process(string _name,int _priority, string _code, int _Arrival_time, int _PID);
-    process(const process& other);
-    process& operator=(const process& other);
+    process(const process& compare);
+    process& operator=(const process& compare);
 
 
 
-    bool operator==(const process& other) const;
-    bool operator<(const process& other) const;
+    bool operator==(const process& compare) const;
+    bool operator<(const process& compare) const;
 	
 };
 /*
@@ -44,38 +44,39 @@ process::process(string _name,int _priority, string _code, int _Arrival_time, in
 	priority=_priority;
 }
 
-process::process(const process &other) {
-	this->PID=other.PID;
-	this->IsFinish=other.IsFinish;
-	this->InQueue=other.InQueue;
-	this->process_name=other.process_name;
-	this->arrival_time=other.arrival_time;
-	this->TurnAroundTime=other.TurnAroundTime;
-	this->data_Text=other.data_Text;
-	this->index=other.index;
-	this->priority=other.priority;
+process::process(const process &compare) {
+	this->PID=compare.PID;
+	this->IsFinish=compare.IsFinish;
+	this->InQueue=compare.InQueue;
+	this->process_name=compare.process_name;
+	this->arrival_time=compare.arrival_time;
+	this->TurnAroundTime=compare.TurnAroundTime;
+	this->data_Text=compare.data_Text;
+	this->index=compare.index;
+	this->priority=compare.priority;
 }
 
-process& process::operator = (const process &other){
-	this->PID=other.PID;
-	this->IsFinish=other.IsFinish;
-	this->InQueue=other.InQueue;
-	this->process_name=other.process_name;
-	this->arrival_time=other.arrival_time;
-	this->TurnAroundTime=other.TurnAroundTime;
-	this->data_Text=other.data_Text;
-	this->index=other.index;
-	this->priority=other.priority;
+process& process::operator = (const process &compare){
+	this->PID=compare.PID;
+	this->IsFinish=compare.IsFinish;
+	this->InQueue=compare.InQueue;
+	this->process_name=compare.process_name;
+	this->arrival_time=compare.arrival_time;
+	this->TurnAroundTime=compare.TurnAroundTime;
+	this->data_Text=compare.data_Text;
+	this->index=compare.index;
+	this->priority=compare.priority;
 	return *this;
 }
 
-bool process::operator==(const process &other) const {
-    return this->priority==other.priority;
+bool process::operator==(const process &compare) const {
+    return this->priority==compare.priority;
 }
 
-bool process::operator<(const process &other) const {
-    return this->priority > other.priority || (this->priority==other.priority && this->arrival_time>other.arrival_time) ||
-            ((this->priority==other.priority && this->arrival_time==other.arrival_time && this->PID > other.PID));
+bool process::operator<(const process &compare) const {
+    if (this->priority==compare.priority)
+		return this->arrival_time>compare.arrival_time;
+	return this->priority>compare.priority;
 }
 
 #endif
