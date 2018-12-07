@@ -1,3 +1,8 @@
+/*
+*   Yusuf Sabri Bayrakdar
+*   2016400378
+*   Operating Systems Project 1
+*/
 #include <iostream>
 #include <fstream>
 #include <string>
